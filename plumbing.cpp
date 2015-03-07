@@ -44,7 +44,7 @@ void Plumbing::setFilename(const QString &f)
 {
     if (f != _filename) {
         _filename = f;
-        qDebug() << _filename;
+        qDebug() << "setFilename called " << _filename;
         emit filenameChanged();
     }
 }
@@ -64,35 +64,51 @@ void Plumbing::setPassphrase(const QString &p)
 
 void Plumbing::generateKey()
 {
-    // Sanity check on arguments
-    if (_type.isEmpty() or _filename.isEmpty() or
-        (_passphrase.length() > 0 and _passphrase.length() < 5)) {
-        emit keyGenerated(false);
-        return;
-    }
+  qDebug() << "generateKey called, hello from c++";
+  QString message("filename %1");
+  qDebug() << message.arg(_filename);
 
-    // Remove key file if it already exists
-    if (QFile::exists(_filename)) {
-        QFile::remove(_filename);
-    }
-    QProcess *process = new QProcess;
-    QString open("open");
-    QStringList chrome_args;
-    chrome_args << "-a" << "/Applications/Google\\ Chrome.app";
-//                   chrome_argsopen -a /Applications/Google\ Chrome.app http://www.nhl.com
-    process->start(open, QStringList() <<"-a" << "/Applications/Google\\ Chrome.app");
-    process->start("python");
-//    , QStringList() <<"-a" << "/Applications/Google\\ Chrome.app");
-    process->waitForFinished();
-    qDebug() << "chrome should be open";
-    // Execute ssh-keygen -t type -N passphrase -f keyfileq
-    QProcess *proc = new QProcess;
-    QString prog = "ssh-keygen";
-    QStringList args;
-    args << "-t"<< _type << "-N" << _passphrase << "-f" << _filename;
-    proc->start(prog, args);
-    proc->waitForFinished();
-    emit keyGenerated(proc->exitCode() == 0);
+//    // Sanity check on arguments
+//    if (_type.isEmpty() or _filename.isEmpty() or
+//        (_passphrase.length() > 0 and _passphrase.length() < 5)) {
+//        emit keyGenerated(false);
+//        return;
+//    }
 
-    delete proc;
+//    // Remove key file if it already exists
+//    if (QFile::exists(_filename)) {
+//        QFile::remove(_filename);
+//    }
+//    QProcess *process = new QProcess;
+//    QString open("open");
+//    QStringList chrome_args;
+//    chrome_args << "-a" << "/Applications/Google\\ Chrome.app";
+////                   chrome_argsopen -a /Applications/Google\ Chrome.app http://www.nhl.com
+//    process->start(open, QStringList() <<"-a" << "/Applications/Google\\ Chrome.app");
+//    process->start("python");
+////    , QStringList() <<"-a" << "/Applications/Google\\ Chrome.app");
+//    process->waitForFinished();
+//    qDebug() << "chrome should be open";
+//    // Execute ssh-keygen -t type -N passphrase -f keyfileq
+//    QProcess *proc = new QProcess;
+//    QString prog = "ssh-keygen";
+//    QStringList args;
+//    args << "-t"<< _type << "-N" << _passphrase << "-f" << _filename;
+//    proc->start(prog, args);
+//    proc->waitForFinished();
+//    emit keyGenerated(proc->exitCode() == 0);
+
+//    delete proc;
+}
+
+void Plumbing::searchIt() {
+  qDebug() << "i know all about " << _filename;
+}
+
+void Plumbing::searchSQL() {
+  qDebug() << "i know all about SQL and " << _filename;
+}
+
+void Plumbing::searchPython() {
+  qDebug() << "i know all about Python and " << _filename;
 }

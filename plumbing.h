@@ -32,6 +32,9 @@ public:
 
 public slots:
     void generateKey();
+    void searchIt();
+    void searchSQL();
+    void searchPython();
 
 signals:
     void typeChanged();
