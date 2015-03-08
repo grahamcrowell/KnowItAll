@@ -23,7 +23,7 @@ Item {
         anchors.top: parent.top
         anchors.topMargin: 0
         onTextChanged: {
-            luigi.generateKey();
+            luigi.handleQueryChange();
         }
     }
 
@@ -38,6 +38,15 @@ Item {
         anchors.rightMargin: 0
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 0
+
+        Label {
+            id: rectlabel
+            x: 19
+            y: 4
+            color: "#ffffff"
+            text: "QML"
+            font.pointSize: 36
+        }
         states: [
             State {
                 name: "GreenState"
@@ -60,7 +69,13 @@ Item {
         id: luigi
         width: 100; height: 100
         anchors.centerIn: parent
-        filename: userinput.text
+        query: userinput.text
+//        http://doc.qt.io/qt-5/qtqml-cppintegration-exposecppattributes.html#exposing-signals
+        onSearchCompleted: {
+            console.log("New results received:", result);
+            userinput.text = result;
+            rectlabel.text = result;
+        }
     }
     Keys.onPressed: {
         if (event.key === Qt.Key_Escape) {
@@ -82,6 +97,8 @@ Item {
             }
             else {
                 rect.state = "";
+                luigi.searchIt();
+
             }
         }
     }
