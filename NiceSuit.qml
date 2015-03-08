@@ -12,8 +12,8 @@ Item {
         focus: true
         font.pointSize: 24
         font.family: "Courier"
+        placeholderText: "ask allah"
         text: ""
-        placeholderText: qsTr("ask allah")
         anchors.right: parent.right
         anchors.rightMargin: 0
         anchors.left: parent.left
@@ -24,13 +24,12 @@ Item {
         anchors.topMargin: 0
         onTextChanged: {
             luigi.generateKey();
-
         }
     }
 
     Rectangle {
         id: rect
-        color: "#2e22af"
+        color: "blue"
         anchors.top: userinput.bottom
         anchors.topMargin: 0
         anchors.left: parent.left
@@ -76,7 +75,12 @@ Item {
 
         }
         else if (event.key === Qt.Key_Return) {
-            rect.state = "";
+            if (userinput.text == "") {
+                userinput.placeholderText = "fuck you then";
+            }
+            else {
+                rect.state = "";
+            }
         }
     }
 }
