@@ -4,40 +4,15 @@ import plumbing 0.1
 
 Item {
     id: queryitem
-    width: 400
-    height: 100
+    width: parent.width
+    height: parent.width
     anchors.fill: parent
-    TextField {
-        id: userinput
-        focus: true
-        font.pointSize: 24
-        font.family: "Courier"
-        placeholderText: "ask allah"
-        text: ""
-        anchors.right: parent.right
-        anchors.rightMargin: 0
-        anchors.left: parent.left
-        anchors.leftMargin: 0
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 50
-        anchors.top: parent.top
-        anchors.topMargin: 0
-        onTextChanged: {
-            luigi.generateKey();
-        }
-    }
+
 
     Rectangle {
         id: rect
-        color: "blue"
-        anchors.top: userinput.bottom
-        anchors.topMargin: 0
-        anchors.left: parent.left
-        anchors.leftMargin: 0
-        anchors.right: parent.right
-        anchors.rightMargin: 0
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 0
+        color: "white"
+        anchors.fill: parent
         states: [
             State {
                 name: "GreenState"
@@ -58,9 +33,10 @@ Item {
 
     Plumbing {
         id: luigi
-        width: 100; height: 100
+        width: 100;
+        height: 100
         anchors.centerIn: parent
-        filename: userinput.text
+//        filename: userinput.text
     }
     Keys.onPressed: {
         if (event.key === Qt.Key_Escape) {
@@ -69,21 +45,23 @@ Item {
 
         else if ((event.key === Qt.Key_Return) && (event.modifiers & Qt.ShiftModifier)) {
             rect.state = "GreenState";
-            luigi.searchSQL();
+//            luigi.searchSQL();
         }
         else if ((event.key === Qt.Key_Return) && (event.modifiers & Qt.ControlModifier)) {
             rect.state = "RedState";
-            luigi.searchPython();
+//            luigi.searchPython();
 
         }
-        else if (event.key === Qt.Key_Return) {
-            if (userinput.text == "") {
-                userinput.placeholderText = "fuck you then";
-            }
-            else {
-                rect.state = "";
-            }
-        }
+//        else if (event.key === Qt.Key_Return) {
+//            //            if (userinput.text == "") {
+//            ////                userinput.placeholderText = "fuck you then";
+//            //            }
+//            //            else {
+//            //                rect.state = "";
+//            //            }
+////            rect.color ="pink";
+//        }
     }
 }
+
 

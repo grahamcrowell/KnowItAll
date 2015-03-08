@@ -7,80 +7,80 @@
 #include "plumbing.h"
 
 Plumbing::Plumbing(QQuickItem *parent)
-    : QQuickPaintedItem(parent),
-    _type("rsa")
+    : QQuickPaintedItem(parent)
+//    , _type("rsa")
 {
-  _types << "dsa" <<  "ecdsa" <<  "rsa" << "rsa1";
+//  _types << "dsa" <<  "ecdsa" <<  "rsa" << "rsa1";
 }
 
 Plumbing::~Plumbing()
 {
 }
 
-QString Plumbing::type()
+//QString Plumbing::type()
+//{
+//    return _type;
+//}
+
+//void Plumbing::setType(const QString &t)
+//{
+//    // Check for valid type.
+//    if (!_types.contains(t))
+//        return;
+
+//    if (t != _type) {
+//        _type = t;
+//        emit typeChanged();
+//    }
+//}
+
+//QStringList Plumbing::types()
+//{
+//    return _types;
+//}
+
+QString Plumbing::getText()
 {
-    return _type;
+    return _text;
 }
 
-void Plumbing::setType(const QString &t)
+void Plumbing::setText(const QString &f)
 {
-    // Check for valid type.
-    if (!_types.contains(t))
-        return;
-
-    if (t != _type) {
-        _type = t;
-        emit typeChanged();
+    if (f != _text) {
+        _text = f;
+        qDebug() << "setFilename called " << _text;
+        emit textChanged();
     }
 }
 
-QStringList Plumbing::types()
-{
-    return _types;
-}
+//QString Plumbing::passphrase()
+//{
+//    return _passphrase;
+//}
 
-QString Plumbing::filename()
-{
-    return _filename;
-}
-
-void Plumbing::setFilename(const QString &f)
-{
-    if (f != _filename) {
-        _filename = f;
-        qDebug() << "setFilename called " << _filename;
-        emit filenameChanged();
-    }
-}
-
-QString Plumbing::passphrase()
-{
-    return _passphrase;
-}
-
-void Plumbing::setPassphrase(const QString &p)
-{
-    if (p != _passphrase) {
-        _passphrase = p;
-        emit passphraseChanged();
-    }
-}
+//void Plumbing::setPassphrase(const QString &p)
+//{
+//    if (p != _passphrase) {
+//        _passphrase = p;
+//        emit passphraseChanged();
+//    }
+//}
 void Plumbing::paint(QPainter *painter)
 {
-  qDebug() << "leave me alone while i paint " << _filename;
+  qDebug() << "leave me alone while i paint " << _text;
     QColor colour = QColor("green");
     QPen pen(colour,2);
     painter->setPen(pen);
     painter->setRenderHints(QPainter::Antialiasing, true);
     painter->drawPie(boundingRect().adjusted(1, 1, -1, -1), 90 * 16, 290 * 16);
-
-    qDebug() << "OK what you want? " << _filename;
+    painter->drawEllipse(10,10,60,90);
+    qDebug() << "OK what you want? " << _text;
 }
 void Plumbing::generateKey()
 {
   qDebug() << "generateKey called, hello from c++";
   QString message("filename %1");
-  qDebug() << message.arg(_filename);
+  qDebug() << message.arg(_text);
 
 //    // Sanity check on arguments
 //    if (_type.isEmpty() or _filename.isEmpty() or
@@ -116,13 +116,14 @@ void Plumbing::generateKey()
 }
 
 void Plumbing::searchIt() {
-  qDebug() << "i know all about " << _filename;
+  qDebug() << "i know all about " << _text;
+//  emit seachedIt
 }
 
 void Plumbing::searchSQL() {
-  qDebug() << "i know all about SQL and " << _filename;
+  qDebug() << "i know all about SQL and " << _text;
 }
 
 void Plumbing::searchPython() {
-  qDebug() << "i know all about Python and " << _filename;
+  qDebug() << "i know all about Python and " << _text;
 }

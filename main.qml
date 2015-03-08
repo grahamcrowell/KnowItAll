@@ -7,8 +7,8 @@ import QtAudioEngine 1.0
 ApplicationWindow {
     id: applicationWindow1
     visible: true
-    width: 400
-    height: 100
+    width: 600
+    height: 600
     title: "KnowItAll"
 
     menuBar: MenuBar {
