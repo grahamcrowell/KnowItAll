@@ -1,10 +1,14 @@
 #include <QFile>
 #include <QProcess>
 #include <QDebug>
+#include <QColor>
+#include <QPainter>
+
 #include "plumbing.h"
 
-Plumbing::Plumbing()
-    : _type("rsa")
+Plumbing::Plumbing(QQuickItem *parent)
+    : QQuickPaintedItem(parent),
+    _type("rsa")
 {
   _types << "dsa" <<  "ecdsa" <<  "rsa" << "rsa1";
 }
@@ -61,7 +65,17 @@ void Plumbing::setPassphrase(const QString &p)
         emit passphraseChanged();
     }
 }
+void Plumbing::paint(QPainter *painter)
+{
+  qDebug() << "leave me alone while i paint " << _filename;
+    QColor colour = QColor("green");
+    QPen pen(colour,2);
+    painter->setPen(pen);
+    painter->setRenderHints(QPainter::Antialiasing, true);
+    painter->drawPie(boundingRect().adjusted(1, 1, -1, -1), 90 * 16, 290 * 16);
 
+    qDebug() << "OK what you want? " << _filename;
+}
 void Plumbing::generateKey()
 {
   qDebug() << "generateKey called, hello from c++";

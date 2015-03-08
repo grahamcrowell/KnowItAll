@@ -58,6 +58,8 @@ Item {
 
     Plumbing {
         id: luigi
+        width: 100; height: 100
+        anchors.centerIn: parent
         filename: userinput.text
     }
     Keys.onPressed: {

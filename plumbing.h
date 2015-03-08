@@ -4,10 +4,12 @@
 #include <QObject>
 #include <QString>
 #include <QStringList>
+#include <QtQuick/QQuickPaintedItem>
+#include <QColor>
 
 // Simple QML object to generate SSH key pairs by calling ssh-keygen.
 
-class Plumbing : public QObject
+class Plumbing : public QQuickPaintedItem
 {
     Q_OBJECT
     Q_PROPERTY(QString type READ type WRITE setType NOTIFY typeChanged)
@@ -16,7 +18,7 @@ class Plumbing : public QObject
     Q_PROPERTY(QString passphrase READ filename WRITE setPassphrase NOTIFY passphraseChanged)
 
 public:
-    Plumbing();
+    Plumbing(QQuickItem *parent = 0);
     ~Plumbing();
 
     QString type();
@@ -29,6 +31,8 @@ public:
 
     QString passphrase();
     void setPassphrase(const QString &p);
+
+    void paint(QPainter *painter);
 
 public slots:
     void generateKey();
