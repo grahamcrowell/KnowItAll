@@ -6,6 +6,7 @@
 #include <QStringList>
 #include <QtQuick/QQuickPaintedItem>
 #include <QColor>
+#include <QProcess>
 
 // Simple QML component to that allows QML <-> C++ integration.
 class Plumbing : public QQuickPaintedItem
@@ -14,6 +15,7 @@ class Plumbing : public QQuickPaintedItem
     Q_PROPERTY(QString query READ getQuery WRITE setQuery NOTIFY queryChanged)
 
 public:
+    QProcess *proc;
     Plumbing(QQuickItem *parent = 0);
     ~Plumbing();
 
@@ -22,11 +24,14 @@ public:
 
     void paint(QPainter *painter);
 
+
+
 public slots:
     void handleQueryChange();
     void searchIt();
     void searchSQL();
     void searchPython();
+    void handleProcess();
 
 //http://doc.qt.io/qt-5/qtqml-cppintegration-exposecppattributes.html#exposing-signals
 signals:

@@ -67,8 +67,10 @@ Item {
 
     Plumbing {
         id: luigi
-        width: 100; height: 100
+        width: 100;
+        height: 100
         anchors.centerIn: parent
+        visible: false
         query: userinput.text
 //        http://doc.qt.io/qt-5/qtqml-cppintegration-exposecppattributes.html#exposing-signals
         onSearchCompleted: {
@@ -94,9 +96,11 @@ Item {
         else if (event.key === Qt.Key_Return) {
             if (userinput.text == "") {
                 userinput.placeholderText = "fuck you then";
+                luigi.visible = true;
             }
             else {
                 rect.state = "";
+                luigi.visible = false;
                 luigi.searchIt();
 
             }

@@ -160,6 +160,7 @@ DIST          = /usr/local/Cellar/qt5/5.4.1/mkspecs/features/spec_pre.prf \
 		/usr/local/Cellar/qt5/5.4.1/mkspecs/features/qt_config.prf \
 		/usr/local/Cellar/qt5/5.4.1/mkspecs/macx-g++/qmake.conf \
 		/usr/local/Cellar/qt5/5.4.1/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/usr/local/Cellar/qt5/5.4.1/mkspecs/features/exclusive_builds.prf \
 		/usr/local/Cellar/qt5/5.4.1/mkspecs/features/default_pre.prf \
 		/usr/local/Cellar/qt5/5.4.1/mkspecs/features/mac/default_pre.prf \
@@ -330,6 +331,7 @@ Makefile: KnowItAll.pro /usr/local/Cellar/qt5/5.4.1/mkspecs/macx-g++/qmake.conf 
 		/usr/local/Cellar/qt5/5.4.1/mkspecs/features/qt_config.prf \
 		/usr/local/Cellar/qt5/5.4.1/mkspecs/macx-g++/qmake.conf \
 		/usr/local/Cellar/qt5/5.4.1/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/usr/local/Cellar/qt5/5.4.1/mkspecs/features/exclusive_builds.prf \
 		/usr/local/Cellar/qt5/5.4.1/mkspecs/features/default_pre.prf \
 		/usr/local/Cellar/qt5/5.4.1/mkspecs/features/mac/default_pre.prf \
@@ -465,6 +467,7 @@ Makefile: KnowItAll.pro /usr/local/Cellar/qt5/5.4.1/mkspecs/macx-g++/qmake.conf 
 /usr/local/Cellar/qt5/5.4.1/mkspecs/features/qt_config.prf:
 /usr/local/Cellar/qt5/5.4.1/mkspecs/macx-g++/qmake.conf:
 /usr/local/Cellar/qt5/5.4.1/mkspecs/features/spec_post.prf:
+.qmake.stash:
 /usr/local/Cellar/qt5/5.4.1/mkspecs/features/exclusive_builds.prf:
 /usr/local/Cellar/qt5/5.4.1/mkspecs/features/default_pre.prf:
 /usr/local/Cellar/qt5/5.4.1/mkspecs/features/mac/default_pre.prf:
@@ -553,6 +556,7 @@ compiler_rcc_make_all: qrc_qml.cpp
 compiler_rcc_clean:
 	-$(DEL_FILE) qrc_qml.cpp
 qrc_qml.cpp: qml.qrc \
+		NiceSuit.qml \
 		main.qml
 	/usr/local/Cellar/qt5/5.4.1/bin/rcc -name qml qml.qrc -o qrc_qml.cpp
 
@@ -565,6 +569,10 @@ moc_plumbing.cpp: /usr/local/Cellar/qt5/5.4.1/lib/QtCore.framework/Versions/5/He
 		/usr/local/Cellar/qt5/5.4.1/lib/QtCore.framework/Versions/5/Headers/qstring.h \
 		/usr/local/Cellar/qt5/5.4.1/lib/QtCore.framework/Versions/5/Headers/QStringList \
 		/usr/local/Cellar/qt5/5.4.1/lib/QtCore.framework/Versions/5/Headers/qstringlist.h \
+		/usr/local/Cellar/qt5/5.4.1/lib/QtGui.framework/Versions/5/Headers/QColor \
+		/usr/local/Cellar/qt5/5.4.1/lib/QtGui.framework/Versions/5/Headers/qcolor.h \
+		/usr/local/Cellar/qt5/5.4.1/lib/QtCore.framework/Versions/5/Headers/QProcess \
+		/usr/local/Cellar/qt5/5.4.1/lib/QtCore.framework/Versions/5/Headers/qprocess.h \
 		plumbing.h
 	/usr/local/Cellar/qt5/5.4.1/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -I/usr/local/Cellar/qt5/5.4.1/mkspecs/macx-g++ -I/Users/grahamcrowell/Dropbox/github_local/KnowItAll -I/usr/local/Cellar/qt5/5.4.1/lib/QtQuick.framework/Headers -I/usr/local/Cellar/qt5/5.4.1/lib/QtWidgets.framework/Headers -I/usr/local/Cellar/qt5/5.4.1/lib/QtGui.framework/Headers -I/usr/local/Cellar/qt5/5.4.1/lib/QtQml.framework/Headers -I/usr/local/Cellar/qt5/5.4.1/lib/QtNetwork.framework/Headers -I/usr/local/Cellar/qt5/5.4.1/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/usr/include/c++/4.2.1 -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/usr/include/c++/4.2.1/backward -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/6.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/usr/include -F/usr/local/Cellar/qt5/5.4.1/lib plumbing.h -o moc_plumbing.cpp
 
@@ -600,15 +608,21 @@ main.o: main.cpp /usr/local/Cellar/qt5/5.4.1/lib/QtWidgets.framework/Versions/5/
 		/usr/local/Cellar/qt5/5.4.1/lib/QtCore.framework/Versions/5/Headers/QString \
 		/usr/local/Cellar/qt5/5.4.1/lib/QtCore.framework/Versions/5/Headers/qstring.h \
 		/usr/local/Cellar/qt5/5.4.1/lib/QtCore.framework/Versions/5/Headers/QStringList \
-		/usr/local/Cellar/qt5/5.4.1/lib/QtCore.framework/Versions/5/Headers/qstringlist.h
+		/usr/local/Cellar/qt5/5.4.1/lib/QtCore.framework/Versions/5/Headers/qstringlist.h \
+		/usr/local/Cellar/qt5/5.4.1/lib/QtGui.framework/Versions/5/Headers/QColor \
+		/usr/local/Cellar/qt5/5.4.1/lib/QtGui.framework/Versions/5/Headers/qcolor.h \
+		/usr/local/Cellar/qt5/5.4.1/lib/QtCore.framework/Versions/5/Headers/QProcess \
+		/usr/local/Cellar/qt5/5.4.1/lib/QtCore.framework/Versions/5/Headers/qprocess.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
-plumbing.o: plumbing.cpp /usr/local/Cellar/qt5/5.4.1/lib/QtCore.framework/Versions/5/Headers/QFile \
-		/usr/local/Cellar/qt5/5.4.1/lib/QtCore.framework/Versions/5/Headers/qfile.h \
-		/usr/local/Cellar/qt5/5.4.1/lib/QtCore.framework/Versions/5/Headers/QProcess \
+plumbing.o: plumbing.cpp /usr/local/Cellar/qt5/5.4.1/lib/QtCore.framework/Versions/5/Headers/QProcess \
 		/usr/local/Cellar/qt5/5.4.1/lib/QtCore.framework/Versions/5/Headers/qprocess.h \
 		/usr/local/Cellar/qt5/5.4.1/lib/QtCore.framework/Versions/5/Headers/QDebug \
 		/usr/local/Cellar/qt5/5.4.1/lib/QtCore.framework/Versions/5/Headers/qdebug.h \
+		/usr/local/Cellar/qt5/5.4.1/lib/QtGui.framework/Versions/5/Headers/QColor \
+		/usr/local/Cellar/qt5/5.4.1/lib/QtGui.framework/Versions/5/Headers/qcolor.h \
+		/usr/local/Cellar/qt5/5.4.1/lib/QtGui.framework/Versions/5/Headers/QPainter \
+		/usr/local/Cellar/qt5/5.4.1/lib/QtGui.framework/Versions/5/Headers/qpainter.h \
 		plumbing.h \
 		/usr/local/Cellar/qt5/5.4.1/lib/QtCore.framework/Versions/5/Headers/QObject \
 		/usr/local/Cellar/qt5/5.4.1/lib/QtCore.framework/Versions/5/Headers/qobject.h \
