@@ -4,7 +4,8 @@
 #include <QQmlEngine>
 #include <QQuickWindow>
 #include <QSurfaceFormat>
-#include "plumbing.h"
+//#include "plumbing.h"
+#include "picaso.h"
 
 // Main wrapper program.
 // Special handling is needed when using Qt Quick Controls for the top window.
@@ -15,7 +16,9 @@ int main(int argc, char ** argv)
     QApplication app(argc, argv);
 
     // Register our component type with QML.
-    qmlRegisterType<Plumbing>("plumbing", 0, 1, "Plumbing");
+//    qmlRegisterType<Plumbing>("plumbing", 0, 1, "Plumbing");
+    qmlRegisterType<Picaso>("picaso", 0, 1, "Picaso");
+
 
     int rc = 0;
 
